@@ -9,9 +9,7 @@ function App() {
         <Navbar />
         <div className="flex flex-col w-full">
           <TopBar />
-          <section className="bg-secondary flex-grow p-4 lg:p-8">
-            Main content
-          </section>
+          <section className="bg-secondary flex-grow p-4">Main content</section>
         </div>
       </main>
     </div>

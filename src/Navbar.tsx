@@ -1,4 +1,20 @@
-import { useEffect, useState } from "react";
+import { ReactNode, useEffect, useState } from "react";
+
+function TransitionContainer({
+  expandNav,
+  children,
+}: {
+  expandNav: boolean;
+  children: ReactNode;
+}) {
+  return (
+    <div
+      className={"transition-all " + (!expandNav ? "w-0" : "w-screen md:w-44")}
+    >
+      {expandNav && children}
+    </div>
+  );
+}
 
 export default function Navbar() {
   const [expandNav, setExpandNav] = useState(false);
@@ -9,14 +25,12 @@ export default function Navbar() {
 
   return (
     <nav
-      className={`flex flex-col bg-primary px-1 py-4 md:p-4 text-white gap-y-4 ${
-        expandNav ? "min-w-[100vw] md:min-w-fit" : ""
-      }`}
+      className="flex flex-col bg-primary transition-all px-1 py-4 md:p-4 text-white gap-y-4"
       id="nav-menu"
     >
       <a
         href="./"
-        className="p-4 items-center flex gap-4 cursor-pointer"
+        className="p-4 items-center flex cursor-pointer"
         title="Home"
       >
         <svg
@@ -40,22 +54,16 @@ export default function Navbar() {
           <path d="M4.93 4.93 3 3a.7.7 0 0 1 0-1" />
           <path d="M9.58 12.18c1.24 2.98 1.77 5.95 1.57 8.28a.8.8 0 0 1-1.13.68 20.82 20.82 0 0 1-4.5-3.15" />
         </svg>
-        <h2
-          className={`text-xl text-nowrap pr-4 transition font-thin ${
-            !expandNav ? "hidden" : "block"
-          }`}
-        >
-          Company Admin
-        </h2>
+        <TransitionContainer expandNav={expandNav}>
+          <h2 className={`text-xl text-nowrap px-4 transition font-thin`}>
+            Company Admin
+          </h2>
+        </TransitionContainer>
       </a>
       <ul>
         <li className="pb-4">
           <hr className="mb-2 bg-white opacity-15" />
-          <a
-            href="./"
-            className="flex gap-4 p-4 items-center"
-            title="Dashboard"
-          >
+          <a href="./" className="flex p-4 items-center" title="Dashboard">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="24"
@@ -73,18 +81,15 @@ export default function Navbar() {
               <rect width="7" height="9" x="14" y="12" rx="1" />
               <rect width="7" height="5" x="3" y="16" rx="1" />
             </svg>
-            <span
-              className={`font-semibold uppercase ${
-                !expandNav ? "hidden" : "block"
-              }`}
-            >
-              Dashboard
-            </span>
+
+            <TransitionContainer expandNav={expandNav}>
+              <span className="font-semibold uppercase pl-4">Dashboard</span>
+            </TransitionContainer>
           </a>
           <hr className="my-2 bg-white opacity-15" />
         </li>
         <li
-          className="opacity-50 flex gap-4 p-4 cursor-not-allowed"
+          className="opacity-50 flex p-4 cursor-not-allowed"
           title="Customers"
         >
           <svg
@@ -104,18 +109,12 @@ export default function Navbar() {
             <path d="M22 21v-2a4 4 0 0 0-3-3.87" />
             <path d="M16 3.13a4 4 0 0 1 0 7.75" />
           </svg>
-          <span
-            className={`font-semibold uppercase ${
-              !expandNav ? "hidden" : "block"
-            }`}
-          >
-            Customers
-          </span>
+
+          <TransitionContainer expandNav={expandNav}>
+            <span className="font-semibold uppercase pl-4">Customers</span>
+          </TransitionContainer>
         </li>
-        <li
-          className="opacity-50 flex gap-4 p-4 cursor-not-allowed"
-          title="Projects"
-        >
+        <li className="opacity-50 flex p-4 cursor-not-allowed" title="Projects">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="24"
@@ -131,16 +130,12 @@ export default function Navbar() {
             <path d="M20 20a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.9a2 2 0 0 1-1.69-.9L9.6 3.9A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2Z" />
             <path d="m9 13 2 2 4-4" />
           </svg>
-          <span
-            className={`font-semibold uppercase ${
-              !expandNav ? "hidden" : "block"
-            }`}
-          >
-            Projects
-          </span>
+          <TransitionContainer expandNav={expandNav}>
+            <span className="font-semibold uppercase pl-4">Projects</span>
+          </TransitionContainer>
         </li>
         <li
-          className="opacity-50 flex gap-4 p-4 cursor-not-allowed"
+          className="opacity-50 flex p-4 cursor-not-allowed"
           title="Reporting"
         >
           <svg
@@ -162,13 +157,9 @@ export default function Navbar() {
             <path d="M2 18h4" />
             <path d="M21.378 5.626a1 1 0 1 0-3.004-3.004l-5.01 5.012a2 2 0 0 0-.506.854l-.837 2.87a.5.5 0 0 0 .62.62l2.87-.837a2 2 0 0 0 .854-.506z" />
           </svg>
-          <span
-            className={`font-semibold uppercase ${
-              !expandNav ? "hidden" : "block"
-            }`}
-          >
-            Reporting
-          </span>
+          <TransitionContainer expandNav={expandNav}>
+            <span className="font-semibold uppercase pl-4">Reporting</span>
+          </TransitionContainer>
         </li>
       </ul>
       <div
@@ -181,7 +172,7 @@ export default function Navbar() {
           aria-expanded={expandNav}
           aria-controls="nav-menu"
           title="Toggle Nav"
-          className={`rounded-full flex justify-center items-center p-1 md:p-2 max-w-fit cursor-pointer transition ${
+          className={`rounded-full flex justify-center items-center p-1 md:p-2 max-w-fit cursor-pointer transition-all ${
             !expandNav ? "rotate-180" : ""
           }`}
           style={{
