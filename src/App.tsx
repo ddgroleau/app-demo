@@ -1,4 +1,5 @@
 import "./App.css";
+import Dashboard from "./Dashboard";
 import Navbar from "./Navbar";
 import TopBar from "./TopBar";
 
@@ -9,7 +10,9 @@ function App() {
         <Navbar />
         <div className="flex flex-col w-full">
           <TopBar />
-          <section className="bg-secondary flex-grow p-4">Main content</section>
+          <section className="bg-secondary flex-grow p-4 lg:p-8">
+            <Dashboard />
+          </section>
         </div>
       </main>
     </div>
