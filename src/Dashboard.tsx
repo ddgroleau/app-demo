@@ -80,7 +80,7 @@ export default function Dashboard({ onClick }: { onClick: () => void }) {
     return () => window.removeEventListener("resize", screenWidthListener);
   }, [screenWidth]);
   return (
-    <section className="flex flex-col gap-y-8 lg:gap-y-4 max-w-[min(75vw,1600px)]">
+    <section className="flex flex-col gap-y-8 lg:gap-y-4 max-w-[min(75vw,1534px)]">
       <div className="flex flex-wrap gap-4 justify-between">
         <h1 className="text-2xl text-gray-600">Dashboard</h1>
         <Button className="flex gap-2" onClick={onClick}>
@@ -88,7 +88,7 @@ export default function Dashboard({ onClick }: { onClick: () => void }) {
           Generate Report
         </Button>
       </div>
-      <div className="flex flex-wrap gap-4 md:gap-8 mt-2">
+      <div className="flex flex-wrap xl:justify-between gap-4 md:gap-8 mt-2">
         <DashboardBadge
           title="Earnings (Monthly)"
           metric={parseInt(
@@ -137,7 +137,7 @@ export default function Dashboard({ onClick }: { onClick: () => void }) {
           <DashboardChart chartTitle="Earnings Overview">
             <ChartContainer
               config={chartConfig}
-              className="min-h-56 sm:min-h-72 max-w-full"
+              className="min-h-56 sm:min-h-72 max-w-full flex items-center pt-4 sm:pt-0"
             >
               <LineChart data={chartData.slice(screenWidth > 1200 ? 0 : 6)}>
                 <CartesianGrid vertical={false} />
@@ -167,7 +167,7 @@ export default function Dashboard({ onClick }: { onClick: () => void }) {
           <DashboardChart chartTitle="Revenue Sources">
             <ChartContainer
               config={chartConfig}
-              className="min-h-56 sm:min-h-72 max-w-full"
+              className="pt-4 sm:pt-0 min-h-56 sm:min-h-72 max-w-full flex items-center"
             >
               <PieChart className="flex min-h-fit">
                 <Pie
@@ -175,7 +175,7 @@ export default function Dashboard({ onClick }: { onClick: () => void }) {
                   cx="50%"
                   cy="50%"
                   labelLine={true}
-                  outerRadius={screenWidth > 640 ? 100 : 75}
+                  outerRadius={screenWidth > 640 ? 100 : 65}
                   fill="#8884d8"
                   dataKey="value"
                   label={({ name, value }) => `${name}: ${value}%`}
