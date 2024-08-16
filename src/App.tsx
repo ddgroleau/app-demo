@@ -27,7 +27,7 @@ function App() {
             <Card className="max-w-[min(90vw,35rem)]">
               <CardHeader>
                 <CardTitle className="flex justify-between gap-8 items-center">
-                  <span className="font-medium opacity-70">
+                  <span className="font-medium opacity-70 leading-10">
                     I hope you are enjoying the demo!
                   </span>
                   <Button
