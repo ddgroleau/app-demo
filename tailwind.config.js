@@ -1,14 +1,16 @@
-const { Sidebar } = require("lucide-react");
+const colors = ["success", "info", "danger", "warning"];
+
+const safeList = [
+  ...colors.map((x) => `bg-${x}`),
+  ...colors.map((x) => `[&>div]:bg-${x}`),
+  ...colors.map((x) => `border-${x}`),
+  ...colors.map((x) => `text-${x}`),
+];
 
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   darkMode: ["class"],
-  content: [
-    "./pages/**/*.{ts,tsx}",
-    "./components/**/*.{ts,tsx}",
-    "./app/**/*.{ts,tsx}",
-    "./src/**/*.{ts,tsx}",
-  ],
+  content: ["./src/**/*.{ts,tsx}"],
   prefix: "",
   theme: {
     container: {
@@ -26,6 +28,7 @@ module.exports = {
         success: "#1CC88A",
         info: "#36B9CC",
         warning: "#F6C23E",
+        danger: "#e74a3b",
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
         primary: {
@@ -79,4 +82,5 @@ module.exports = {
     },
   },
   plugins: [require("tailwindcss-animate")],
+  safelist: safeList,
 };
