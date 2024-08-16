@@ -137,7 +137,7 @@ export default function Dashboard({ onClick }: { onClick: () => void }) {
           <DashboardChart chartTitle="Earnings Overview">
             <ChartContainer
               config={chartConfig}
-              className="min-h-56 sm:min-h-72 max-w-full flex items-center pt-4 sm:pt-0"
+              className="min-h-64 sm:min-h-72 max-w-full flex items-center"
             >
               <LineChart data={chartData.slice(screenWidth > 1200 ? 0 : 6)}>
                 <CartesianGrid vertical={false} />
@@ -167,7 +167,7 @@ export default function Dashboard({ onClick }: { onClick: () => void }) {
           <DashboardChart chartTitle="Revenue Sources">
             <ChartContainer
               config={chartConfig}
-              className="pt-4 sm:pt-0 min-h-56 sm:min-h-72 max-w-full flex items-center"
+              className="min-h-64 sm:min-h-72 max-w-full flex items-center"
             >
               <PieChart className="flex min-h-fit">
                 <Pie
