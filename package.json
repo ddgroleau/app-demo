@@ -2,10 +2,10 @@
   "name": "app-demo",
   "private": true,
   "version": "0.0.0",
-  "type": "module",
   "homepage": "https://ddgroleau.github.io/app-demo/",
+  "type": "module",
   "scripts": {
-    "dev": "vite",
+    "dev": "vite --config vite.config.local.ts",
     "build": "tsc -b && vite build",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d dist",

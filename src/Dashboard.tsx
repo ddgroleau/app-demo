@@ -80,7 +80,7 @@ export default function Dashboard({ onClick }: { onClick: () => void }) {
     return () => window.removeEventListener("resize", screenWidthListener);
   }, [screenWidth]);
   return (
-    <section className="flex flex-col gap-y-8 lg:gap-y-4">
+    <section className="flex flex-col gap-y-8 lg:gap-y-4 max-w-[min(75vw,1600px)]">
       <div className="flex flex-wrap gap-4 justify-between">
         <h1 className="text-2xl text-gray-600">Dashboard</h1>
         <Button className="flex gap-2" onClick={onClick}>
@@ -132,65 +132,69 @@ export default function Dashboard({ onClick }: { onClick: () => void }) {
           }
         />
       </div>
-      <div className="mt-4 flex gap-8 flex-wrap">
-        <DashboardChart chartTitle="Earnings Overview">
-          <ChartContainer
-            config={chartConfig}
-            className="min-h-48 sm:min-h-72 w-full"
-          >
-            <LineChart data={chartData}>
-              <CartesianGrid vertical={false} />
-              <XAxis
-                dataKey="month"
-                tickLine={false}
-                tickMargin={10}
-                axisLine={false}
-                tickFormatter={(value) => value.slice(0, 3)}
-              />
-              <YAxis
-                dataKey={"inStore"}
-                domain={[0, 55000]}
-                tickFormatter={(v) => "$" + v.toLocaleString()}
-                tickLine={false}
-                axisLine={false}
-              />
-              <ChartTooltip content={<ChartTooltipContent />} />
-              <ChartLegend content={<ChartLegendContent />} />
-              <Line dataKey="online" fill="var(--color-online)" />
-              <Line dataKey="inStore" fill="var(--color-inStore)" />
-            </LineChart>
-          </ChartContainer>
-        </DashboardChart>
-        <DashboardChart chartTitle="Revenue Sources">
-          <ChartContainer
-            config={chartConfig}
-            className="min-h-56 sm:min-h-72 w-full"
-          >
-            <PieChart>
-              <Pie
-                data={pieChartData}
-                cx="50%"
-                cy="50%"
-                labelLine={true}
-                outerRadius={screenWidth > 640 ? 100 : 75}
-                fill="#8884d8"
-                dataKey="value"
-                label={({ name, value }) => `${name}: ${value}%`}
-              >
-                {pieChartData.map((_, index) => (
-                  <Cell
-                    key={`cell-${index}`}
-                    fill={pieChartColors[index % pieChartColors.length]}
-                  />
-                ))}
-              </Pie>
-              <ChartTooltip content={<ChartTooltipContent />} />
-              <ChartLegend content={<ChartLegendContent />} />
-            </PieChart>
-          </ChartContainer>
-        </DashboardChart>
+      <div className="mt-4 flex gap-8 flex-wrap xl:flex-nowrap">
+        <div className="flex-grow">
+          <DashboardChart chartTitle="Earnings Overview">
+            <ChartContainer
+              config={chartConfig}
+              className="min-h-56 sm:min-h-72 max-w-full"
+            >
+              <LineChart data={chartData.slice(screenWidth > 1200 ? 0 : 6)}>
+                <CartesianGrid vertical={false} />
+                <XAxis
+                  dataKey="month"
+                  tickLine={false}
+                  tickMargin={10}
+                  axisLine={false}
+                  tickFormatter={(value) => value.slice(0, 3)}
+                />
+                <YAxis
+                  dataKey={"inStore"}
+                  domain={[0, 55000]}
+                  tickFormatter={(v) => "$" + v.toLocaleString()}
+                  tickLine={false}
+                  axisLine={false}
+                />
+                <ChartTooltip content={<ChartTooltipContent />} />
+                <ChartLegend content={<ChartLegendContent />} />
+                <Line dataKey="online" fill="var(--color-online)" />
+                <Line dataKey="inStore" fill="var(--color-inStore)" />
+              </LineChart>
+            </ChartContainer>
+          </DashboardChart>
+        </div>
+        <div className="flex-grow-0">
+          <DashboardChart chartTitle="Revenue Sources">
+            <ChartContainer
+              config={chartConfig}
+              className="min-h-56 sm:min-h-72 max-w-full"
+            >
+              <PieChart className="flex min-h-fit">
+                <Pie
+                  data={pieChartData}
+                  cx="50%"
+                  cy="50%"
+                  labelLine={true}
+                  outerRadius={screenWidth > 640 ? 100 : 75}
+                  fill="#8884d8"
+                  dataKey="value"
+                  label={({ name, value }) => `${name}: ${value}%`}
+                >
+                  {pieChartData.map((_, index) => (
+                    <Cell
+                      key={`cell-${index}`}
+                      fill={pieChartColors[index % pieChartColors.length]}
+                    />
+                  ))}
+                </Pie>
+                <ChartTooltip content={<ChartTooltipContent />} />
+                <ChartLegend content={<ChartLegendContent />} />
+              </PieChart>
+            </ChartContainer>
+          </DashboardChart>
+        </div>
       </div>
-      <div className="mt-4 flex gap-8 flex-wrap lg:flex-nowrap min-w-fit w-full">
+      <div className="mt-4 flex gap-8 flex-wrap xl:flex-nowrap min-w-fit w-full">
         <DashboardChart chartTitle="Projects">
           <div className="flex flex-col gap-4 pb-4 w-full">
             <DashboardProgress
